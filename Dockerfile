@@ -40,7 +40,8 @@ ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
 
 ADD files /
 
-RUN ./build.sh
+RUN chmod u+x build.sh && \
+    ./build.sh
 #RUN clean-install bash \
 #    && /build.sh \
 #    && rm /build.sh
