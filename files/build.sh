@@ -23,12 +23,12 @@ set -o pipefail
 
 yum -y update && yum -y upgrade
 
-clean-install \
-    openjdk-8-jre-headless \
-    libjemalloc1 \
-    localepurge \
-    dumb-init \
-    wget
+yum install \
+    java-1.8.0-openjdk-devel
+    #libjemalloc1 \
+    #localepurge \
+    #dumb-init \
+    #wget
 
 CASSANDRA_PATH="cassandra/${CASSANDRA_VERSION}/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
 CASSANDRA_DOWNLOAD="http://www.apache.org/dyn/closer.cgi?path=/${CASSANDRA_PATH}&as_json=1"
@@ -54,59 +54,60 @@ if [ ! -z "$DEV_IMAGE" ]; then
 else
     rm -rf  $CASSANDRA_HOME/pylib;
 fi
-
-apt-get -y purge localepurge
-apt-get -y autoremove
-apt-get clean
-
-rm -rf \
-    $CASSANDRA_HOME/*.txt \
-    $CASSANDRA_HOME/doc \
-    $CASSANDRA_HOME/javadoc \
-    $CASSANDRA_HOME/tools/*.yaml \
-    $CASSANDRA_HOME/tools/bin/*.bat \
-    $CASSANDRA_HOME/bin/*.bat \
-    doc \
-    man \
-    info \
-    locale \
-    common-licenses \
-    ~/.bashrc \
-    /var/lib/apt/lists/* \
-    /var/log/* \
-    /var/cache/debconf/* \
-    /etc/systemd \
-    /lib/lsb \
-    /lib/udev \
-    /usr/share/doc/ \
-    /usr/share/doc-base/ \
-    /usr/share/man/ \
-    /tmp/* \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/plugin \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/javaws \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/jjs \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/orbd \
-    /usr/lib/jvm/java-8-openjdk-amd64/bin/pack200 \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/policytool \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmid \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmiregistry \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/servertool \
-    /usr/lib/jvm/java-8-openjdk-amd64/bin/tnameserv \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/unpack200 \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/javaws.jar \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/deploy* \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/desktop \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/*javafx* \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/*jfx* \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libdecora_sse.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libprism_*.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libfxplugins.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libglass.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libgstreamer-lite.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjavafx*.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjfx*.so \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jfxrt.jar \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/oblique-fonts \
-    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/plugin.jar \
-    /usr/lib/jvm/java-8-openjdk-amd64/man
+#
+#apt-get -y purge localepurge
+#apt-get -y autoremove
+#apt-get clean
+#
+#rm -rf \
+#    $CASSANDRA_HOME/*.txt \
+#    $CASSANDRA_HOME/doc \
+#    $CASSANDRA_HOME/javadoc \
+#    $CASSANDRA_HOME/tools/*.yaml \
+#    $CASSANDRA_HOME/tools/bin/*.bat \
+#    $CASSANDRA_HOME/bin/*.bat \
+#    doc \
+#    man \
+#    info \
+#    locale \
+#    common-licenses \
+#    ~/.bashrc \
+#    /var/lib/apt/lists/* \
+#    /var/log/* \
+#    /var/cache/debconf/* \
+#    /etc/systemd \
+#    /lib/lsb \
+#    /lib/udev \
+#    /usr/share/doc/ \
+#    /usr/share/doc-base/ \
+#    /usr/share/man/ \
+#    /tmp/* \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/plugin \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/javaws \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/jjs \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/orbd \
+#    /usr/lib/jvm/java-8-openjdk-amd64/bin/pack200 \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/policytool \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmid \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/rmiregistry \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/servertool \
+#    /usr/lib/jvm/java-8-openjdk-amd64/bin/tnameserv \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/unpack200 \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/javaws.jar \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/deploy* \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/desktop \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/*javafx* \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/*jfx* \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libdecora_sse.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libprism_*.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libfxplugins.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libglass.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libgstreamer-lite.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjavafx*.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjfx*.so \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jfxrt.jar \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/oblique-fonts \
+#    /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/plugin.jar \
+#    /usr/lib/jvm/java-8-openjdk-amd64/man
+#
