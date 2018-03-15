@@ -31,7 +31,7 @@ FROM registry.access.redhat.com/rhel:7.4
 #    org.label-schema.vcs-type="Git" \
 #    org.label-schema.vcs-url="https://github.com/k8s-for-greeks/docker-cassandra-k8s"
 
-ENV ASSANDRA_VERSION=3.11.2 \
+ENV CASSANDRA_VERSION=3.11.2 \
     DEV_CONTAINER=true
 
 ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
