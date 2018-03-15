@@ -24,11 +24,11 @@ set -o pipefail
 yum -y update && yum -y upgrade
 
 yum -y install \
+    dumb-init \
     java-1.8.0-openjdk-devel \
-    wget \
+    wget
     #libjemalloc1 \
     #localepurge \
-    dumb-init
 
 CASSANDRA_PATH="cassandra/${CASSANDRA_VERSION}/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
 CASSANDRA_DOWNLOAD="http://www.apache.org/dyn/closer.cgi?path=/${CASSANDRA_PATH}&as_json=1"
