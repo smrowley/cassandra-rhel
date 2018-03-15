@@ -23,7 +23,7 @@ set -o pipefail
 
 yum -y update && yum -y upgrade
 
-yum install \
+yum -y install \
     java-1.8.0-openjdk-devel
     #libjemalloc1 \
     #localepurge \
@@ -50,7 +50,7 @@ chown cassandra: /ready-probe.sh
 
 DEV_IMAGE=${DEV_CONTAINER:-}
 if [ ! -z "$DEV_IMAGE" ]; then
-    yum install python;
+    yum -y install python;
 else
     rm -rf  $CASSANDRA_HOME/pylib;
 fi
