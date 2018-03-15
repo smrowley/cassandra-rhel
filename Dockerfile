@@ -16,10 +16,10 @@ FROM registry.access.redhat.com/rhel:7.4
 #FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
 
 
-ARG BUILD_DATE
-ARG VCS_REF
-ARG CASSANDRA_VERSION
-ARG DEV_CONTAINER
+#ARG BUILD_DATE
+#ARG VCS_REF
+#ARG CASSANDRA_VERSION
+#ARG DEV_CONTAINER
 
 #LABEL \
 #    org.label-schema.build-date=$BUILD_DATE \
@@ -30,6 +30,9 @@ ARG DEV_CONTAINER
 #    org.label-schema.vcs-ref=$VCS_REF \
 #    org.label-schema.vcs-type="Git" \
 #    org.label-schema.vcs-url="https://github.com/k8s-for-greeks/docker-cassandra-k8s"
+
+ENV ASSANDRA_VERSION=3.11.2 \
+    DEV_CONTAINER=true
 
 ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
     CASSANDRA_CONF=/etc/cassandra \
