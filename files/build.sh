@@ -45,7 +45,7 @@ mkdir -p /etc/cassandra
 mv /logback.xml /cassandra.yaml /jvm.options /etc/cassandra/
 mv /usr/local/apache-cassandra-${CASSANDRA_VERSION}/conf/cassandra-env.sh /etc/cassandra/
 
-adduser --disabled-password --no-create-home --gecos '' --disabled-login cassandra
+adduser --no-create-home --shell /sbin/nologin cassandra
 chmod +x /ready-probe.sh
 chown cassandra: /ready-probe.sh
 
