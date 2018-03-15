@@ -50,7 +50,7 @@ chown cassandra: /ready-probe.sh
 
 DEV_IMAGE=${DEV_CONTAINER:-}
 if [ ! -z "$DEV_IMAGE" ]; then
-    clean-install python;
+    yum install python;
 else
     rm -rf  $CASSANDRA_HOME/pylib;
 fi
