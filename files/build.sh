@@ -24,7 +24,8 @@ set -o pipefail
 yum -y update && yum -y upgrade
 
 yum -y install \
-    java-1.8.0-openjdk-devel
+    java-1.8.0-openjdk-devel \
+    wget
     #libjemalloc1 \
     #localepurge \
     #dumb-init \
