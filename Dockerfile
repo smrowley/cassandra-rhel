@@ -58,6 +58,4 @@ VOLUME ["/$CASSANDRA_DATA"]
 # 9160: thrift service
 EXPOSE 7000 7001 7199 9042 9160
 
-CMD ["/bin/bash"]
-
 CMD ["/usr/bin/dumb-init", "/bin/bash", "/run.sh"]
