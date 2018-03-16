@@ -37,7 +37,8 @@ ENV CASSANDRA_VERSION=3.11.2 \
 ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
     CASSANDRA_CONF=/etc/cassandra \
     CASSANDRA_DATA=/cassandra_data \
-    CASSANDRA_LOGS=/var/log/cassandra
+    CASSANDRA_LOGS=/var/log/cassandra \
+    PATH=${PATH}:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
     #JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     #PATH=${PATH}:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
 
