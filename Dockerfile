@@ -50,6 +50,10 @@ RUN chmod u+x build.sh && \
 #    && /build.sh \
 #    && rm /build.sh
 
+# JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true" to false
+# We need to be able to connect to the cluster from cassandra-reaper
+RUN sed -ri 's/authenticate=true/authenticate=false/' /etc/cassandra/cassandra-env.sh
+
 VOLUME ["/$CASSANDRA_DATA"]
 
 # 7000: intra-node communication
