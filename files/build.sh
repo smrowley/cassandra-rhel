@@ -23,9 +23,9 @@ set -o pipefail
 
 yum -y update && yum -y upgrade
 
-yum -y install \
+yum -y install wget
     #java-1.8.0-openjdk-devel \
-    wget
+    #wget
     #libjemalloc1 \
     #localepurge \
 echo "step yum install"
