@@ -47,8 +47,6 @@ USER root
 
 ADD files /
 
-RUN ls -l /
-
 RUN chmod u+x /build.sh && \
     /build.sh
 #RUN clean-install bash \
