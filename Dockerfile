@@ -13,7 +13,7 @@
 # limitations under the License.
 
 #FROM registry.access.redhat.com/rhel:7.4
-FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.3-4
+FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest
 
 
 #ARG BUILD_DATE
