@@ -57,6 +57,8 @@ RUN chmod u+x /build.sh && \
 # We need to be able to connect to the cluster from cassandra-reaper
 RUN sed -ri 's/authenticate=true/authenticate=false/' /etc/cassandra/cassandra-env.sh
 
+RUN java -version
+
 VOLUME ["/$CASSANDRA_DATA"]
 
 # 7000: intra-node communication
