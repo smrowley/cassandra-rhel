@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM registry.access.redhat.com/rhel:7.4
-#FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
+#FROM registry.access.redhat.com/rhel:7.4
+FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
 
 
 #ARG BUILD_DATE
@@ -31,8 +31,8 @@ FROM registry.access.redhat.com/rhel:7.4
 #    org.label-schema.vcs-type="Git" \
 #    org.label-schema.vcs-url="https://github.com/k8s-for-greeks/docker-cassandra-k8s"
 
-#ENV CASSANDRA_VERSION=3.11.2 \
-ENV CASSANDRA_VERSION=3.0.15 \
+ENV CASSANDRA_VERSION=3.11.2 \
+#ENV CASSANDRA_VERSION=3.0.15 \
     DEV_CONTAINER=true
 
 ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
@@ -42,6 +42,8 @@ ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
     PATH=${PATH}:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
     #JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     #PATH=${PATH}:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
+
+USER root
 
 ADD files /
 
