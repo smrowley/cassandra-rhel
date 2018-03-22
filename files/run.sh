@@ -173,4 +173,6 @@ chown -c -R cassandra "${CASSANDRA_DATA}" "${CASSANDRA_CONF_DIR}"
 
 export CLASSPATH=/kubernetes-cassandra.jar
 
+java -version
+
 su cassandra -c "$CASSANDRA_HOME/bin/cassandra -f"
