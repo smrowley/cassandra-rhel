@@ -57,7 +57,7 @@ RUN chmod u+x /build.sh && \
 # We need to be able to connect to the cluster from cassandra-reaper
 RUN sed -ri 's/authenticate=true/authenticate=false/' /etc/cassandra/cassandra-env.sh
 
-RUN 'java -version'
+RUN java -version
 
 #override the s2i entrypoint
 ENTRYPOINT ["/usr/bin/env"]
