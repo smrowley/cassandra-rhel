@@ -31,6 +31,8 @@ FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:1.3-4
 #    org.label-schema.vcs-type="Git" \
 #    org.label-schema.vcs-url="https://github.com/k8s-for-greeks/docker-cassandra-k8s"
 
+RUN java -version
+
 ENV CASSANDRA_VERSION=3.11.2 \
 #ENV CASSANDRA_VERSION=3.0.15 \
     DEV_CONTAINER=true
