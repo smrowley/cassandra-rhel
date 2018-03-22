@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#FROM registry.access.redhat.com/rhel:7.4
 FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest
 
 
@@ -42,8 +41,6 @@ ENV CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
     CASSANDRA_DATA=/cassandra_data \
     CASSANDRA_LOGS=/var/log/cassandra \
     PATH=${PATH}:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
-    #JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
-    #PATH=${PATH}:/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
 
 USER root
 
@@ -51,18 +48,10 @@ ADD files /
 
 RUN chmod u+x /build.sh && \
     /build.sh
-#RUN clean-install bash \
-#    && /build.sh \
-#    && rm /build.sh
 
 # JVM_OPTS="$JVM_OPTS -Dcom.sun.management.jmxremote.authenticate=true" to false
 # We need to be able to connect to the cluster from cassandra-reaper
 RUN sed -ri 's/authenticate=true/authenticate=false/' /etc/cassandra/cassandra-env.sh
-
-#RUN java -version
-
-#override the s2i entrypoint
-ENTRYPOINT ["/usr/bin/env"]
 
 VOLUME ["/$CASSANDRA_DATA"]
 
