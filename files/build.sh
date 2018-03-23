@@ -24,8 +24,20 @@ yum -y update && yum -y upgrade
 yum -y install wget
 
 #download dumb-init
-wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64
+DUMB_INIT_VERSION="1.2.1"
+wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64
 chmod +x /usr/local/bin/dumb-init
+
+#verify dumb-init checksum
+wget -O /tmp/dumb-init-sha256sums https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/sha256sums
+
+if [ sha256sum /usr/local/bin/dumb-init !=
+      grep "dumb-init_1.2.1_amd64$" /tmp/dumb-init-sha256sums | cut -d ' ' -f 1 ]; then
+  echo "Invalid checksum for dumb-init"
+  exit 1
+fi
+
+rm -f /tmp/dumb-init-sha256sums
 
 CASSANDRA_PATH="cassandra/${CASSANDRA_VERSION}/apache-cassandra-${CASSANDRA_VERSION}-bin.tar.gz"
 CASSANDRA_DOWNLOAD="http://www.apache.org/dyn/closer.cgi?path=/${CASSANDRA_PATH}&as_json=1"
