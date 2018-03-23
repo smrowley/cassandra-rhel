@@ -31,11 +31,11 @@ chmod +x /usr/local/bin/dumb-init
 #verify dumb-init checksum
 wget -O /tmp/dumb-init-sha256sums https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/sha256sums
 
-if [ sha256sum /usr/local/bin/dumb-init != grep "dumb-init_1.2.1_amd64$" /tmp/dumb-init-sha256sums | cut -d ' ' -f 1 ]; then
+if [ $(sha256sum /usr/local/bin/dumb-init) == $(grep "dumb-init_1.2.1_amd64$" /tmp/dumb-init-sha256sums | cut -d ' ' -f 1) ]; then
+  echo "Valid checksum for dumb-init binary"
+else
   echo "Invalid checksum for dumb-init binary"
   exit 1
-else
-  echo "Valid checksum for dumb-init binary"
 fi
 
 rm -f /tmp/dumb-init-sha256sums
