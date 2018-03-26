@@ -35,6 +35,8 @@ if [[ $(sha256sum /usr/local/bin/dumb-init | cut -c 1-64) == $(grep -q "dumb-ini
   echo "Valid checksum for dumb-init binary"
 else
   echo "Invalid checksum for dumb-init binary"
+  echo "binary: $(sha256sum /usr/local/bin/dumb-init | cut -c 1-64)"
+  echo "checksum: $(grep -q "dumb-init_1.2.1_amd64$" /tmp/dumb-init-sha256sums | cut -c 1-64)"
   exit 1
 fi
 
