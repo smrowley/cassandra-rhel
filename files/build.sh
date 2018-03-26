@@ -25,11 +25,11 @@ yum -y install wget
 
 #download dumb-init
 DUMB_INIT_VERSION="1.2.1"
-wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64
+wget -q -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/dumb-init_${DUMB_INIT_VERSION}_amd64
 chmod +x /usr/local/bin/dumb-init
 
 #verify dumb-init checksum
-wget -O /tmp/dumb-init-sha256sums https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/sha256sums
+wget -q -O /tmp/dumb-init-sha256sums https://github.com/Yelp/dumb-init/releases/download/v${DUMB_INIT_VERSION}/sha256sums
 
 if [[ $(sha256sum /usr/local/bin/dumb-init | cut -c 1-64) == $(grep "dumb-init_1.2.1_amd64$" /tmp/dumb-init-sha256sums | cut -c 1-64) ]]; then
   echo "Valid checksum for dumb-init binary"
@@ -47,8 +47,22 @@ CASSANDRA_DOWNLOAD="http://www.apache.org/dyn/closer.cgi?path=/${CASSANDRA_PATH}
 CASSANDRA_MIRROR=`wget -q -O - ${CASSANDRA_DOWNLOAD} | grep -oP "(?<=\"preferred\": \")[^\"]+"`
 
 echo "Downloading Apache Cassandra from $CASSANDRA_MIRROR$CASSANDRA_PATH..."
-wget -q -O - $CASSANDRA_MIRROR$CASSANDRA_PATH \
-    | tar -xzf - -C /usr/local
+wget -q -O /tmp/apache-cassandra-bin.tar.gz $CASSANDRA_MIRROR$CASSANDRA_PATH
+
+#verify apache cassandra checksum
+wget -O /tmp/apache-cassandra-md5sum https://www-us.apache.org/dist/cassandra/$CASSANDRA_VERSION/apache-cassandra-$CASSANDRA_VERSION-src.tar.gz.md5
+
+if [[ $(md5sum /tmp/apache-cassandra-bin.tar.gz) == $(cat /tmp/apache-cassandra-md5sum) ]]; then
+  echo "Valid checksum for apache cassandra download"
+else
+  echo "Invalid checksum for apache cassandra download"
+  echo "download: $(md5sum /tmp/apache-cassandra-bin.tar.gz)"
+  echo "checksum: $(cat /tmp/apache-cassandra-md5sum)"
+  exit 1
+fi
+
+#unpack tar file
+tar -xzf /tmp/apache-cassandra-bin.tar.gz -C /usr/local
 
 mkdir -p /cassandra_data/data
 mkdir -p /etc/cassandra
