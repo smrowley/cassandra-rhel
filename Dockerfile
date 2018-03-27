@@ -32,15 +32,17 @@ FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest
 
 RUN java -version
 
-ENV CASSANDRA_VERSION=3.11.2 \
+ENV CASSANDRA_VERSION=3.11.2
+    DUMB_INIT_VERSION=1.2.1
 #ENV CASSANDRA_VERSION=3.0.15 \
-    DEV_CONTAINER=true \
+
+ENV DEV_CONTAINER=true \
     CASSANDRA_HOME=/usr/local/apache-cassandra-${CASSANDRA_VERSION} \
     CASSANDRA_CONF=/etc/cassandra \
     CASSANDRA_DATA=/cassandra_data \
     CASSANDRA_LOGS=/var/log/cassandra \
-    PATH=${PATH}:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin \
-    DUMB_INIT_VERSION="1.2.1"
+    PATH=${PATH}:/usr/local/apache-cassandra-${CASSANDRA_VERSION}/bin
+
 
 USER root
 
