@@ -32,7 +32,7 @@ FROM registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift:latest
 
 RUN java -version
 
-ENV CASSANDRA_VERSION=3.11.2
+ENV CASSANDRA_VERSION=3.11.2 \
     DUMB_INIT_VERSION=1.2.1
 #ENV CASSANDRA_VERSION=3.0.15 \
 
